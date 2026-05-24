@@ -1,0 +1,513 @@
+/* ==========================================================================
+   GENERADOR DE IP - ESTILOS CSS
+   Tema: Negro con Morado Neón
+   ========================================================================== */
+
+/* ==========================================================================
+   1. RESET Y CONFIGURACIÓN BASE
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Consolas', 'Courier New', monospace;
+    background-color: #050505;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. LAYOUT PRINCIPAL
+   ========================================================================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.panel-superior {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+/* ==========================================================================
+   3. TÍTULOS Y ENCABEZADOS
+   ========================================================================== */
+.titulo {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #8A2BE2;
+    text-shadow: 0 0 10px #8A2BE2;
+    letter-spacing: 2px;
+}
+
+.titulo i {
+    color: #9d4edd;
+    margin-right: 10px;
+}
+
+/* ==========================================================================
+   4. FIELDSETS Y LEGENDS (CAJAS DE CONTENIDO)
+   ========================================================================== */
+.seccion fieldset,
+.panel-inferior fieldset {
+    background-color: #0a0a0a;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    padding: 18px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.05);
+}
+
+legend {
+    font-weight: bold;
+    color: #9d4edd;
+    padding: 0 10px;
+    font-size: 0.95rem;
+    background-color: #050505;
+    border: 1px solid #555555;
+    border-radius: 4px;
+}
+
+legend i {
+    margin-right: 5px;
+}
+
+.subtitulo {
+    text-align: center;
+    margin: 10px 0;
+    color: #888888;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   5. RADIO BUTTONS (SELECCIÓN DE CLASE)
+   ========================================================================== */
+.radio-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.radio-group label {
+    background-color: #111111;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #333333;
+    color: #bbbbbb;
+    transition: all 0.3s ease;
+}
+
+.radio-group label:hover {
+    background-color: #1a1a1a;
+    border-color: #8A2BE2;
+    color: #ffffff;
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.3);
+}
+
+/* ==========================================================================
+   6. CAMPOS DE RANGO (SOLO LECTURA)
+   ========================================================================== */
+.rango-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.rango-box input {
+    flex: 1;
+    padding: 10px;
+    background-color: #050505;
+    border: 1px solid #444444;
+    color: #8A2BE2;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   7. INPUTS DE OCTETOS (CAMPOS DE IP)
+   ========================================================================== */
+.ip-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+    justify-content: center;
+}
+
+.input-octeto-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.punto {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #666666;
+}
+
+.octeto {
+    width: 80px;
+    height: 60px;
+    padding: 10px;
+    background-color: #0a0a0a;
+    border: 2px solid #444444;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Estado: Habilitado */
+.octeto:enabled {
+    border-color: #8A2BE2;
+    background-color: #111111;
+    cursor: text;
+    box-shadow: 0 0 5px rgba(138, 43, 226, 0.2);
+}
+
+/* Estado: Deshabilitado */
+.octeto:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: #222222;
+    background-color: #050505;
+    color: #555555;
+}
+
+/* Estado: Focus (activo) */
+.octeto:focus {
+    outline: none;
+    border-color: #c77dff;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+/* Estado: Error */
+.octeto.error {
+    border-color: #ff3366 !important;
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Estado: Correcto */
+.octeto.correcto {
+    border-color: #00e676 !important;
+}
+
+/* Indicador de error (tooltip) */
+.error-indicator {
+    display: none;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff3366;
+    color: #ffffff;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.error-indicator.show {
+    display: block;
+}
+
+/* Eliminar flechas de input number */
+.octeto::-webkit-outer-spin-button,
+.octeto::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.octeto[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ==========================================================================
+   8. CAMPO DE CANTIDAD
+   ========================================================================== */
+.cantidad-box {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.cantidad-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #888888;
+}
+
+.cantidad-box input {
+    width: 140px;
+    padding: 10px;
+    background-color: #050505;
+    border: 2px solid #333333;
+    color: #c77dff;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 1.1rem;
+}
+
+.cantidad-box input:enabled {
+    border-color: #8A2BE2;
+    background-color: #0a0a0a;
+}
+
+/* ==========================================================================
+   9. BOTONES
+   ========================================================================== */
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: 1px solid;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Estado: Deshabilitado */
+.btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}
+
+/* Estado: Hover (solo si está habilitado) */
+.btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+}
+
+.btn i {
+    font-size: 1.1rem;
+}
+
+/* Botón: Validar */
+.btn-validar {
+    background-color: #2a1040;
+    color: #e0e0e0;
+    border-color: #5c2d91;
+}
+
+.btn-validar:not(:disabled):hover {
+    background-color: #4a1f6b;
+    border-color: #8A2BE2;
+}
+
+/* Botón: Generar */
+.btn-generar {
+    background-color: #1a0a2e;
+    color: #d1b3ff;
+    border-color: #444444;
+}
+
+.btn-generar:not(:disabled):hover {
+    background-color: #2a1040;
+    border-color: #8A2BE2;
+}
+
+/* Botón: Borrar */
+.btn-borrar {
+    background-color: #111111;
+    color: #999999;
+    border-color: #333333;
+}
+
+.btn-borrar:not(:disabled):hover {
+    background-color: #222222;
+    border-color: #ff3366;
+    color: #ff3366;
+}
+
+/* Botón: Salir */
+.btn-salir {
+    background-color: #050505;
+    color: #666666;
+    border-color: #222222;
+    margin-bottom: 15px;
+}
+
+.btn-salir:hover {
+    color: #ff3366;
+    border-color: #ff3366;
+}
+
+/* ==========================================================================
+   10. TABLA DE RESULTADOS
+   ========================================================================== */
+.tabla-resultados {
+    margin-top: 15px;
+    overflow-x: auto;
+}
+
+.tabla-resultados h3 {
+    color: #9d4edd;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    border-left: 3px solid #8A2BE2;
+    padding-left: 10px;
+}
+
+.tabla-resultados h3 i {
+    margin-right: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #050505;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #222222;
+}
+
+th, td {
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid #1f1f1f;
+    font-size: 0.85rem;
+}
+
+th {
+    background-color: #111111;
+    color: #8A2BE2;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    background-color: #0a0a0a;
+    color: #cccccc;
+}
+
+tr:hover td {
+    background-color: #1a0a2e;
+}
+
+/* ==========================================================================
+   11. MENSAJES EMERGENTES (TOAST) Y OVERLAY
+   ========================================================================== */
+.console-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background-color: #0a0a0a;
+    border: 1px solid #8A2BE2;
+    color: #ffffff;
+    padding: 18px 35px;
+    border-radius: 4px;
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+    z-index: 1000;
+    font-size: 0.95rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    min-width: 300px;
+}
+
+.console-message.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.console-message::before {
+    content: '> ';
+    color: #8A2BE2;
+    font-weight: bold;
+}
+
+.console-message.error {
+    border-color: #ff3366;
+    box-shadow: 0 0 30px rgba(255, 51, 102, 0.3);
+}
+
+.message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 5, 5, 0.9);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.message-overlay.show {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   12. ANIMACIONES
+   ========================================================================== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+/* ==========================================================================
+   13. DISEÑO RESPONSIVE (MÓVIL)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .panel-superior {
+        grid-template-columns: 1fr;
+    }
+    
+    .ip-inputs {
+        flex-direction: column;
+    }
+    
+    .punto {
+        display: none;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .octeto {
+        width: 100% !important;
+    }
+}
+
+/* ==========================================================================
+   FIN DE ESTILOS
+   ========================================================================== */

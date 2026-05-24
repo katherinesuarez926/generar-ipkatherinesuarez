@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de IP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="titulo"><i class="fas fa-network-wired"></i> GENERADOR DE IP</h1>
+        <div class="panel-superior">
+            <div class="seccion">
+                <fieldset>
+                    <legend><i class="fas fa-layer-group"></i> CLASE DE IP</legend>
+                    <p class="subtitulo">Seleccionar la Clase</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="clase" value="A" id="claseA"> <i class="fas fa-server"></i> Clase A</label>
+                        <label><input type="radio" name="clase" value="B" id="claseB"> <i class="fas fa-server"></i> Clase B</label>
+                        <label><input type="radio" name="clase" value="C" id="claseC"> <i class="fas fa-server"></i> Clase C</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend><i class="fas fa-globe"></i> RANGO DE LA IP</legend>
+                    <div class="rango-box">
+                        <input type="text" id="rangoInicio" readonly placeholder="Inicio">
+                        <input type="text" id="rangoFin" readonly placeholder="Fin">
+                    </div>
+                </fieldset>
+            </div>
+            <div class="seccion">
+                <fieldset>
+                    <legend><i class="fas fa-keyboard"></i> INGRESAR LA DIRECCION</legend>
+                    <div class="ip-inputs">
+                        <div class="input-octeto-wrapper">
+                            <input type="text" id="o1" class="octeto" maxlength="3" placeholder="0" disabled>
+                            <span class="error-indicator" id="error-o1">VACÍO</span>
+                        </div>
+                        <span class="punto">.</span>
+                        <div class="input-octeto-wrapper">
+                            <input type="text" id="o2" class="octeto" maxlength="3" placeholder="0" disabled>
+                            <span class="error-indicator" id="error-o2">VACÍO</span>
+                        </div>
+                        <span class="punto">.</span>
+                        <div class="input-octeto-wrapper">
+                            <input type="text" id="o3" class="octeto" maxlength="3" placeholder="0" disabled>
+                            <span class="error-indicator" id="error-o3">VACÍO</span>
+                        </div>
+                        <span class="punto">.</span>
+                        <div class="input-octeto-wrapper">
+                            <input type="text" id="o4" class="octeto" maxlength="3" placeholder="0" disabled>
+                            <span class="error-indicator" id="error-o4">VACÍO</span>
+                        </div>
+                        <button id="btnValidar" class="btn btn-validar" disabled>
+                            <i class="fas fa-check-circle"></i> VALIDAR IP
+                        </button>
+                    </div>
+                    <div class="cantidad-box">
+                        <label><i class="fas fa-sort-numeric-up"></i> CUANTAS IPS DESEA GENERAR</label>
+                        <input type="number" id="cantidad" min="1" disabled placeholder="0">
+                    </div>
+                    <div class="btn-group">
+                        <button id="btnGenerar" class="btn btn-generar" disabled>
+                            <i class="fas fa-magic"></i> GENERAR
+                        </button>
+                        <button id="btnBorrar" class="btn btn-borrar">
+                            <i class="fas fa-trash-alt"></i> BORRAR
+                        </button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="panel-inferior">
+            <fieldset>
+                <legend><i class="fas fa-table"></i> RESULTADO</legend>
+                <button id="btnSalir" class="btn btn-salir">
+                    <i class="fas fa-sign-out-alt"></i> SALIR
+                </button>
+                <div class="tabla-resultados">
+                    <h3><i class="fas fa-list-ol"></i> IP GENERADA</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th><th>DIRECCION IP</th><th>MASCARA</th>
+                                <th>PRIMERA IP</th><th>ULTIMA IP</th><th>BROADCAST</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody"></tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/logica.js') }}"></script>
+</body>
+</html>
