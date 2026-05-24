@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, render_template, request, jsonify
+import os
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -24,7 +25,7 @@ def generate():
         if not (0 <= val <= 255):
             return jsonify({"error": f"Octeto {idx} fuera de rango"}), 400
 
-    # 2. Determinar clase real (Sin Clase D)
+    # 2. Determinar clase real
     if 1 <= o1 <= 126: claseReal = "A"
     elif 128 <= o1 <= 191: claseReal = "B"
     elif 192 <= o1 <= 223: claseReal = "C"
@@ -36,7 +37,7 @@ def generate():
     if cantidad < 1:
         return jsonify({"error": "Cantidad inválida"}), 400
 
-    # 4. Máscaras de Subred Específicas (Corrección Lógica)
+    # 4. Máscaras de Subred
     if clase == "A":
         subnet_mask = "255.255.0.0"      # /16
     elif clase == "B":
@@ -80,4 +81,7 @@ def generate():
     return jsonify({"results": results, "generated": len(results)})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Obtener el puerto del entorno (Railway lo asigna así) o usar 5000 por defecto
+    port = int(os.environ.get('PORT', 5000))
+    # Escuchar en todas las interfaces (necesario para Railway)
+    app.run(host='0.0.0.0', port=port, debug=True)
